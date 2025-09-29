@@ -59,5 +59,7 @@ export const galleryPhotos = [
   { id:54, src: `${baseUrl}/images/gallery/IMG_0963.JPG`, title: 'Medallia Memory 54' },
   { id:55, src: `${baseUrl}/images/gallery/IMG_0238.JPG`, title: 'Medallia Memory 55' },
   { id:56, src: `${baseUrl}/images/gallery/IMG_0068.JPG`, title: 'Medallia Memory 56' },
-  { id:57, src: `${baseUrl}/images/gallery/IMG_2696 2.jpeg`, title: 'Medallia Memory 57' }
+  { id:57, src: `${baseUrl}/images/gallery/IMG_2696 2.jpeg`, title: 'Medallia Memory 57' },
+  { id:58, src: `${baseUrl}/images/gallery/IMG_9086.JPG`, title: 'Medallia Memory 58' },
+  { id:59, src: `${baseUrl}/images/gallery/IMG_9083.JPG`, title: 'Medallia Memory 59' }
 ];
