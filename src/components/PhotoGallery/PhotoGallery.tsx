@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { galleryPhotos } from '../../data/galleryPhotos';
 import PhotoUpload from '../PhotoUpload/PhotoUpload';
 
@@ -13,7 +13,19 @@ interface Photo {
 const PhotoGallery: React.FC = () => {
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
   const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
-  const [userPhotos, setUserPhotos] = useState<Photo[]>([]);
+  const [userPhotos, setUserPhotos] = useState<Photo[]>(() => {
+    // Load user photos from localStorage on mount
+    const savedPhotos = localStorage.getItem('userUploadedPhotos');
+    if (savedPhotos) {
+      try {
+        return JSON.parse(savedPhotos);
+      } catch (e) {
+        console.error('Failed to load user photos:', e);
+        return [];
+      }
+    }
+    return [];
+  });
   const [imagePositions, setImagePositions] = useState<Map<number, string>>(new Map());
 
   const handleImageError = (photoId: number) => {
@@ -40,6 +52,18 @@ const PhotoGallery: React.FC = () => {
 
     setImagePositions(prev => new Map(prev).set(photoId, position));
   };
+
+  // Save user photos to localStorage whenever they change
+  useEffect(() => {
+    if (userPhotos.length > 0) {
+      try {
+        localStorage.setItem('userUploadedPhotos', JSON.stringify(userPhotos));
+      } catch (e) {
+        console.error('Failed to save user photos:', e);
+        alert('Photo could not be saved - storage limit may have been exceeded. Try uploading a smaller image.');
+      }
+    }
+  }, [userPhotos]);
 
   const handlePhotoUploaded = (newPhoto: { src: string; title: string; description: string }) => {
     const photo: Photo = {
