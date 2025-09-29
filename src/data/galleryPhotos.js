@@ -68,5 +68,8 @@ export const galleryPhotos = [
   { id:63, src: `${baseUrl}/images/gallery/IMG_1048.jpeg`, title: 'Office Fun' },
   { id:64, src: `${baseUrl}/images/gallery/IMG_1065.jpeg`, title: 'Team Photo' },
   { id:65, src: `${baseUrl}/images/gallery/IMG_2183.jpeg`, title: 'Medallia Event' },
-  { id:66, src: `${baseUrl}/images/gallery/IMG_1074.jpeg`, title: 'Good Times' }
+  { id:66, src: `${baseUrl}/images/gallery/IMG_1074.jpeg`, title: 'Good Times' },
+  { id:67, src: `${baseUrl}/images/gallery/medallia-allhands.jpg`, title: 'Medallia All Hands Meeting' },
+  { id:68, src: `${baseUrl}/images/gallery/medallia-nyse-ipo.jpg`, title: 'Medallia NYSE IPO Celebration' },
+  { id:69, src: `${baseUrl}/images/gallery/medallia-team-event.jpg`, title: 'Medallia Team Event' }
 ];
