@@ -1,6 +1,8 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { galleryPhotos } from '../../data/galleryPhotos';
-import PhotoUpload from '../PhotoUpload/PhotoUpload';
+import PhotoUploadFirebase from '../PhotoUpload/PhotoUploadFirebase';
+import { ref, onValue } from 'firebase/database';
+import { database } from '../../config/firebase';
 
 interface Photo {
   id: number;
@@ -13,19 +15,8 @@ interface Photo {
 const PhotoGallery: React.FC = () => {
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
   const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
-  const [userPhotos, setUserPhotos] = useState<Photo[]>(() => {
-    // Load user photos from localStorage on mount
-    const savedPhotos = localStorage.getItem('userUploadedPhotos');
-    if (savedPhotos) {
-      try {
-        return JSON.parse(savedPhotos);
-      } catch (e) {
-        console.error('Failed to load user photos:', e);
-        return [];
-      }
-    }
-    return [];
-  });
+  const [userPhotos, setUserPhotos] = useState<Photo[]>([]);
+  const [firebasePhotos, setFirebasePhotos] = useState<Photo[]>([]);
   const [imagePositions, setImagePositions] = useState<Map<number, string>>(new Map());
 
   const handleImageError = (photoId: number) => {
@@ -53,6 +44,18 @@ const PhotoGallery: React.FC = () => {
     setImagePositions(prev => new Map(prev).set(photoId, position));
   };
 
+  // Load photos from localStorage on mount
+  useEffect(() => {
+    const savedPhotos = localStorage.getItem('userUploadedPhotos');
+    if (savedPhotos) {
+      try {
+        setUserPhotos(JSON.parse(savedPhotos));
+      } catch (e) {
+        console.error('Failed to load user photos:', e);
+      }
+    }
+  }, []);
+
   // Save user photos to localStorage whenever they change
   useEffect(() => {
     if (userPhotos.length > 0) {
@@ -60,10 +63,33 @@ const PhotoGallery: React.FC = () => {
         localStorage.setItem('userUploadedPhotos', JSON.stringify(userPhotos));
       } catch (e) {
         console.error('Failed to save user photos:', e);
-        alert('Photo could not be saved - storage limit may have been exceeded. Try uploading a smaller image.');
       }
     }
   }, [userPhotos]);
+
+  // Fetch photos from Firebase
+  useEffect(() => {
+    try {
+      const photosRef = ref(database, 'photos');
+      const unsubscribe = onValue(photosRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          const photosArray = Object.keys(data).map(key => ({
+            id: key,
+            ...data[key],
+            isUserUploaded: true
+          }));
+          // Sort by upload date, newest first
+          photosArray.sort((a, b) => (b.uploadedAt || 0) - (a.uploadedAt || 0));
+          setFirebasePhotos(photosArray);
+        }
+      });
+
+      return () => unsubscribe();
+    } catch (error) {
+      console.log('Firebase not configured yet, using local storage only');
+    }
+  }, []);
 
   const handlePhotoUploaded = (newPhoto: { src: string; title: string; description: string }) => {
     const photo: Photo = {
@@ -86,8 +112,8 @@ const PhotoGallery: React.FC = () => {
     return shuffled;
   }, []); // Empty dependency array means this only runs once per component mount (page refresh)
 
-  // Combine user photos (at top) and shuffled gallery photos
-  const allPhotos = [...userPhotos, ...shuffledGalleryPhotos];
+  // Combine Firebase photos, local user photos, and shuffled gallery photos
+  const allPhotos = [...firebasePhotos, ...userPhotos, ...shuffledGalleryPhotos];
   const filteredPhotos = allPhotos.filter((photo: Photo) => !imageErrors.has(photo.id));
 
   const handlePhotoClick = (photo: Photo) => {
@@ -191,8 +217,8 @@ const PhotoGallery: React.FC = () => {
           </div>
         )}
 
-        {/* Photo Upload Component */}
-        <PhotoUpload onPhotoUploaded={handlePhotoUploaded} />
+        {/* Photo Upload Component with Firebase */}
+        <PhotoUploadFirebase onPhotoUploaded={handlePhotoUploaded} />
 
         {/* Stats Footer */}
         <div className="mt-16 text-center text-gray-600">
