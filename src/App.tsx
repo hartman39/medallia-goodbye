@@ -27,7 +27,7 @@ function App() {
       const productionConnections = ProductionDataManager.getProductionConnections();
       setConnections(productionConnections);
       setAllConnections(productionConnections);
-      setCurrentView('timeline'); // Start with timeline in production
+      setCurrentView('thankyou'); // Start with thank you page in production
     } else {
       // Development mode: try to load from localStorage
       const storedData = StorageManager.loadData();
