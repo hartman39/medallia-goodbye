@@ -245,18 +245,12 @@ const Timeline: React.FC<TimelineProps> = ({ connections }) => {
       {/* Summary Stats */}
       <div className="bg-white border-t border-gray-200 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
             <div className="text-center">
               <div className="text-2xl font-bold text-medallia-purple">
                 {stats.totalConnections}
               </div>
               <div className="text-sm text-gray-600">Total Connections</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-medallia-purple">
-                {Object.keys(stats.departmentCounts).length}
-              </div>
-              <div className="text-sm text-gray-600">Departments</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-medallia-purple">
