@@ -92,14 +92,19 @@ const PhotoGallery: React.FC = () => {
   }, []);
 
   const handlePhotoUploaded = (newPhoto: { src: string; title: string; description: string }) => {
-    const photo: Photo = {
-      id: Date.now(), // Use timestamp as unique ID
-      src: newPhoto.src,
-      title: newPhoto.title,
-      description: newPhoto.description,
-      isUserUploaded: true
-    };
-    setUserPhotos(prev => [photo, ...prev]); // Add to beginning
+    // Only add to local state if Firebase is not being used
+    // Firebase photos are automatically synced via the onValue listener
+    const isFirebaseUrl = newPhoto.src.includes('firebasestorage.googleapis.com');
+    if (!isFirebaseUrl) {
+      const photo: Photo = {
+        id: Date.now(), // Use timestamp as unique ID
+        src: newPhoto.src,
+        title: newPhoto.title,
+        description: newPhoto.description,
+        isUserUploaded: true
+      };
+      setUserPhotos(prev => [photo, ...prev]); // Add to beginning
+    }
   };
 
   // Shuffle gallery photos on each render using useMemo to preserve order during re-renders
@@ -112,8 +117,10 @@ const PhotoGallery: React.FC = () => {
     return shuffled;
   }, []); // Empty dependency array means this only runs once per component mount (page refresh)
 
-  // Combine Firebase photos, local user photos, and shuffled gallery photos
-  const allPhotos = [...firebasePhotos, ...userPhotos, ...shuffledGalleryPhotos];
+  // Combine photos - use Firebase photos if available, otherwise use localStorage photos
+  // This prevents duplicates when photos are in both Firebase and localStorage
+  const userUploadedPhotos = firebasePhotos.length > 0 ? firebasePhotos : userPhotos;
+  const allPhotos = [...userUploadedPhotos, ...shuffledGalleryPhotos];
   const filteredPhotos = allPhotos.filter((photo: Photo) => !imageErrors.has(photo.id));
 
   const handlePhotoClick = (photo: Photo) => {
