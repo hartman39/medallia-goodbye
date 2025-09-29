@@ -164,11 +164,6 @@ const PhotoGallery: React.FC = () => {
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300" />
                   </div>
-                  <div className="p-2 sm:p-3 lg:p-4">
-                    <h3 className="font-semibold text-xs sm:text-sm lg:text-base text-gray-900 group-hover:text-purple-600 transition-colors text-center truncate">
-                      {photo.title}
-                    </h3>
-                  </div>
                 </div>
               </div>
             ))}
