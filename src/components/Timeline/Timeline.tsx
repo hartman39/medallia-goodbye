@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Connection } from '../../utils/csvParser';
 import { DataProcessor } from '../../utils/dataProcessor';
@@ -10,6 +10,7 @@ interface TimelineProps {
 const Timeline: React.FC<TimelineProps> = ({ connections }) => {
   const [expandedYear, setExpandedYear] = useState<number | null>(null);
   const [selectedConnection, setSelectedConnection] = useState<Connection | null>(null);
+  const [showTooltip, setShowTooltip] = useState(false);
 
   const yearGroups = useMemo(() => {
     return DataProcessor.groupByYear(connections);
@@ -19,8 +20,27 @@ const Timeline: React.FC<TimelineProps> = ({ connections }) => {
     return DataProcessor.calculateStats(connections);
   }, [connections]);
 
+  useEffect(() => {
+    // Show tooltip on first visit
+    const hasSeenTooltip = localStorage.getItem('timelineTooltipSeen');
+    if (!hasSeenTooltip) {
+      setShowTooltip(true);
+      // Auto-hide after 6 seconds
+      const timer = setTimeout(() => {
+        setShowTooltip(false);
+        localStorage.setItem('timelineTooltipSeen', 'true');
+      }, 6000);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   const handleYearClick = (year: number) => {
     setExpandedYear(expandedYear === year ? null : year);
+    // Hide tooltip when user clicks a year
+    if (showTooltip) {
+      setShowTooltip(false);
+      localStorage.setItem('timelineTooltipSeen', 'true');
+    }
   };
 
   const getDepartmentColor = (department?: string): string => {
@@ -68,6 +88,35 @@ const Timeline: React.FC<TimelineProps> = ({ connections }) => {
 
       {/* Timeline */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Interactive Tooltip */}
+        <AnimatePresence>
+          {showTooltip && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="mb-8 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-lg p-4 shadow-lg relative"
+            >
+              <div className="flex items-center space-x-2">
+                <span className="text-2xl">👆</span>
+                <div>
+                  <p className="font-semibold text-lg">Click on any year to explore!</p>
+                  <p className="text-sm opacity-90">See the amazing people who joined Medallia each year</p>
+                </div>
+              </div>
+              <button
+                onClick={() => {
+                  setShowTooltip(false);
+                  localStorage.setItem('timelineTooltipSeen', 'true');
+                }}
+                className="absolute top-2 right-2 text-white/70 hover:text-white"
+              >
+                ✕
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         <div className="relative">
           {/* Timeline line */}
           <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-300"></div>
