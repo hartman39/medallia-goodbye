@@ -75,13 +75,11 @@ const Timeline: React.FC<TimelineProps> = ({ connections }) => {
           <div className="text-center">
             <h1 className="text-4xl font-bold mb-4">My Medallia Journey</h1>
             <p className="text-xl opacity-90">
-              {stats.totalConnections} amazing colleagues across {stats.totalYears} years
+              1,133 amazing colleagues across 13 years
             </p>
-            {stats.firstConnection && stats.lastConnection && (
-              <p className="text-lg opacity-75 mt-2">
-                From {formatDate(stats.firstConnection.connectedDate)} to {formatDate(stats.lastConnection.connectedDate)}
-              </p>
-            )}
+            <p className="text-lg opacity-75 mt-2">
+              From July 2012 to September 19, 2025
+            </p>
           </div>
         </div>
       </div>
