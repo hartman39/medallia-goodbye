@@ -9,9 +9,10 @@ import PhotoGallery from './components/PhotoGallery/PhotoGallery';
 import ReviewConnections from './components/ReviewConnections/ReviewConnections';
 import ManageConnections from './components/ManageConnections/ManageConnections';
 import MessageBoard from './components/MessageBoard/MessageBoard';
+import Quote from './components/Quote/Quote';
 import './App.css';
 
-type ViewMode = 'upload' | 'timeline' | 'wherearettheynow' | 'gallery' | 'thankyou' | 'customers' | 'messages' | 'review' | 'manage';
+type ViewMode = 'upload' | 'timeline' | 'wherearettheynow' | 'gallery' | 'thankyou' | 'quote' | 'customers' | 'messages' | 'review' | 'manage';
 
 function App() {
   const [connections, setConnections] = useState<Connection[]>([]);
@@ -84,6 +85,7 @@ function App() {
         { key: 'manage', label: '⚙️ Manage', description: 'Remove incorrect connections' }
       ] : []),
       { key: 'thankyou', label: '💙 Thank You', description: 'Gratitude messages' },
+      { key: 'quote', label: '✨ Quote', description: 'Inspirational farewell' },
       { key: 'gallery', label: '📸 Gallery', description: 'Photo memories' },
       { key: 'timeline', label: '📅 Timeline', description: 'Your journey through time' },
       { key: 'wherearettheynow', label: '🏢 Where Are They Now', description: 'Top companies alumni joined' },
@@ -246,6 +248,9 @@ function App() {
 
       case 'gallery':
         return <PhotoGallery />;
+
+      case 'quote':
+        return <Quote />;
 
       case 'thankyou':
         return (
