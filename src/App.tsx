@@ -87,7 +87,6 @@ function App() {
       { key: 'gallery', label: '📸 Gallery', description: 'Photo memories' },
       { key: 'timeline', label: '📅 Timeline', description: 'Your journey through time' },
       { key: 'wherearettheynow', label: '🏢 Where Are They Now', description: 'Top companies alumni joined' },
-      { key: 'customers', label: '🤝 Thank You Customers', description: 'Gratitude to our amazing customers' },
       { key: 'messages', label: '💬 Messages', description: 'Leave farewell messages' }
     ];
 
