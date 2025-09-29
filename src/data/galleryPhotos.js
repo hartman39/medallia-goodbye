@@ -61,5 +61,12 @@ export const galleryPhotos = [
   { id:56, src: `${baseUrl}/images/gallery/IMG_0068.JPG`, title: 'Medallia Memory 56' },
   { id:57, src: `${baseUrl}/images/gallery/IMG_2696 2.jpeg`, title: 'Medallia Memory 57' },
   { id:58, src: `${baseUrl}/images/gallery/IMG_9086.JPG`, title: 'Medallia Memory 58' },
-  { id:59, src: `${baseUrl}/images/gallery/IMG_9083.JPG`, title: 'Medallia Memory 59' }
+  { id:59, src: `${baseUrl}/images/gallery/IMG_9083.JPG`, title: 'Medallia Memory 59' },
+  { id:60, src: `${baseUrl}/images/gallery/IMG_9481.JPG`, title: 'Experience 2024 Conference' },
+  { id:61, src: `${baseUrl}/images/gallery/IMG_9454.JPG`, title: 'Team Celebration' },
+  { id:62, src: `${baseUrl}/images/gallery/IMG_6331.JPG`, title: 'Medallia Moment' },
+  { id:63, src: `${baseUrl}/images/gallery/IMG_1048.jpeg`, title: 'Office Fun' },
+  { id:64, src: `${baseUrl}/images/gallery/IMG_1065.jpeg`, title: 'Team Photo' },
+  { id:65, src: `${baseUrl}/images/gallery/IMG_2183.jpeg`, title: 'Medallia Event' },
+  { id:66, src: `${baseUrl}/images/gallery/IMG_1074.jpeg`, title: 'Good Times' }
 ];
