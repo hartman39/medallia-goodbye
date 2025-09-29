@@ -78,7 +78,7 @@ const Timeline: React.FC<TimelineProps> = ({ connections }) => {
               1,133 amazing colleagues across 13 years
             </p>
             <p className="text-lg opacity-75 mt-2">
-              From July 2012 to September 19, 2025
+              July 2012 to September 2025
             </p>
           </div>
         </div>
