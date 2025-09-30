@@ -192,7 +192,7 @@ const PhotoGallery: React.FC = () => {
             onClick={closeModal}
           >
             <div
-              className="max-w-4xl max-h-full relative"
+              className="max-w-7xl w-full max-h-full relative"
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -203,17 +203,12 @@ const PhotoGallery: React.FC = () => {
                 ✕
               </button>
 
-              <div className="bg-white rounded-lg overflow-hidden shadow-2xl">
+              <div className="rounded-lg overflow-hidden shadow-2xl">
                 <img
                   src={selectedPhoto.src}
                   alt={selectedPhoto.title}
-                  className="w-full max-h-96 object-contain"
+                  className="w-full max-h-[85vh] object-contain"
                 />
-                <div className="p-6">
-                  <h2 className="text-2xl font-bold text-gray-900 text-center">
-                    {selectedPhoto.title}
-                  </h2>
-                </div>
               </div>
             </div>
           </div>

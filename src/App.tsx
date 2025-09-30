@@ -75,14 +75,7 @@ function App() {
   const renderNavigation = () => {
     if (currentView === 'upload') return null;
 
-    const isProduction = ProductionDataManager.isProductionMode();
-
     const navItems = [
-      // Only show review and manage in development mode
-      ...(!isProduction ? [
-        { key: 'review', label: '🔍 Review', description: 'Add missed connections' },
-        { key: 'manage', label: '⚙️ Manage', description: 'Remove incorrect connections' }
-      ] : []),
       { key: 'thankyou', label: '💙 Thank You', description: 'Gratitude messages' },
       { key: 'gallery', label: '📸 Gallery', description: 'Photo memories' },
       { key: 'timeline', label: '📅 Timeline', description: 'Your journey through time' },

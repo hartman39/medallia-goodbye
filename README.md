@@ -1,46 +1,103 @@
-# Getting Started with Create React App
+# Thank You, Medallia
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A heartfelt goodbye tribute site for my incredible colleagues at Medallia. This interactive web app celebrates the connections, memories, and experiences from my time at one of the world's leading customer experience platforms.
 
-## Available Scripts
+## 🎯 What This Is
 
-In the project directory, you can run:
+A personalized farewell site featuring:
 
-### `npm start`
+- **💙 Thank You Message** - A heartfelt goodbye to Medallia and its people
+- **📸 Photo Gallery** - Shared memories from conferences, team events, and milestones
+- **📅 Timeline** - Visualizing my journey through time at Medallia
+- **🏢 Where Are They Now** - Data visualization showing top companies Medallia alumni joined
+- **💬 Message Board** - Interactive space for colleagues to leave farewell messages
+- **🤝 Customer Tribute** - Recognition of amazing clients like Vanguard, Marriott, Walmart, and more
 
-Runs the app in the development mode.\
+## 🚀 Live Site
+
+Visit the live site at: [https://hartman39.github.io/medallia-goodbye](https://hartman39.github.io/medallia-goodbye)
+
+## 🛠️ Tech Stack
+
+- **React 19** with TypeScript
+- **Firebase** - Realtime Database for messages and photo uploads
+- **Tailwind CSS** - Responsive, modern UI design
+- **D3.js** - Data visualizations
+- **Chart.js** - Interactive charts
+- **GitHub Pages** - Deployment
+- **Google Analytics** - Usage tracking
+
+## 📦 Local Development
+
+### Prerequisites
+
+- Node.js (v16+)
+- npm or yarn
+
+### Setup
+
+1. Clone the repository:
+```bash
+git clone https://github.com/hartman39/medallia-goodbye.git
+cd medallia-goodbye
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Set up environment variables (see [SETUP.md](./SETUP.md)):
+```bash
+cp .env.example .env
+# Add your Firebase configuration
+```
+
+4. Run the development server:
+```bash
+npm start
+```
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Available Scripts
 
-### `npm test`
+- **`npm start`** - Runs the app in development mode
+- **`npm test`** - Launches the test runner
+- **`npm run build`** - Builds the app for production
+- **`npm run deploy`** - Deploys to GitHub Pages
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 📁 Project Structure
 
-### `npm run build`
+```
+medallia-goodbye/
+├── src/
+│   ├── components/       # React components (Timeline, Gallery, etc.)
+│   ├── utils/           # CSV parser, storage, data processing
+│   ├── config/          # Firebase configuration
+│   └── App.tsx          # Main application component
+├── public/
+│   ├── photos/          # Photo gallery images
+│   └── index.html       # HTML template with Google Analytics
+└── medallia-connection-validator/  # LinkedIn CSV processing tool
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🔧 Additional Tools
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### LinkedIn Connection Validator
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+A standalone utility (`medallia-connection-validator/`) that helps process LinkedIn CSV exports to identify Medallia connections. This tool was used to prepare the data for the "Where Are They Now" visualization.
 
-### `npm run eject`
+## 📚 Documentation
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [SETUP.md](./SETUP.md) - Firebase and GitHub deployment setup
+- [ANALYTICS_SETUP.md](./ANALYTICS_SETUP.md) - Google Analytics configuration
+- [DEPLOYMENT.md](./DEPLOYMENT.md) - Deployment instructions
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 💙 Built With
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+This project was built with [Claude Code](https://claude.com/product/claude-code) - Anthropic's AI-powered development tool.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 📝 License
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+This is a personal project. Feel free to use it as inspiration for your own farewell projects!

@@ -12,28 +12,28 @@ GitHub has detected exposed API keys in your Firebase configuration. While Fireb
 
 3. In the left sidebar, click **Secrets and variables** → **Actions**
 
-4. Click **New repository secret** and add each of these secrets:
+4. Click **New repository secret** and add each of these secrets (using your actual Firebase config values from your `.env` file):
 
    - **Name:** `REACT_APP_FIREBASE_API_KEY`
-     **Value:** `AIzaSyCEUA0_s0FaN76sgYbEKQG-txKLepZsJ3g`
+     **Value:** `<your-api-key>`
 
    - **Name:** `REACT_APP_FIREBASE_AUTH_DOMAIN`
-     **Value:** `medallia-goodbye.firebaseapp.com`
+     **Value:** `<your-project-id>.firebaseapp.com`
 
    - **Name:** `REACT_APP_FIREBASE_DATABASE_URL`
-     **Value:** `https://medallia-goodbye-default-rtdb.firebaseio.com`
+     **Value:** `https://<your-project-id>-default-rtdb.firebaseio.com`
 
    - **Name:** `REACT_APP_FIREBASE_PROJECT_ID`
-     **Value:** `medallia-goodbye`
+     **Value:** `<your-project-id>`
 
    - **Name:** `REACT_APP_FIREBASE_STORAGE_BUCKET`
-     **Value:** `medallia-goodbye.firebasestorage.app`
+     **Value:** `<your-project-id>.firebasestorage.app`
 
    - **Name:** `REACT_APP_FIREBASE_MESSAGING_SENDER_ID`
-     **Value:** `821867534143`
+     **Value:** `<your-sender-id>`
 
    - **Name:** `REACT_APP_FIREBASE_APP_ID`
-     **Value:** `1:821867534143:web:abc170d739abb5aa7fa58a`
+     **Value:** `<your-app-id>`
 
 5. The GitHub Actions workflow will automatically use these secrets during deployment
 
